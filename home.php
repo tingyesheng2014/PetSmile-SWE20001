@@ -1,9 +1,19 @@
+<?php
+session_start();
+
+$con = mysqli_connect('localhost', 'root', '', 'petsmile');
+
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -58,14 +68,28 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="home.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="home.php" class="nav-item nav-link active">Home</a>
+                    <a href="about.php" class="nav-item nav-link">About</a>
+                    <a href="service.php" class="nav-item nav-link">Service</a>
+                    <a href="bookinghistory.php" class="nav-item nav-link">Booking History</a>
+                    <div class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Booking</a>
+                      <div class="dropdown-menu rounded-0 m-0">
+                          <a href="boarding.php" class="dropdown-item">Pet Boarding</a>
+                          <a href="grooming.php" class="dropdown-item">Pet Grooming</a>
+                          <a href="treatment.php" class="dropdown-item">Pet Treatment</a>
+                      </div>
+                  </div>
+                    <a href="contact.php" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="login.html" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Login</a>
+                <?php
+                if (isset($_SESSION['Cust_ID'])) {
+                    echo '<a href="edit-profile.php" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Hi, ' . $_SESSION['Cust_ID'] . '</a>';
+                } else {
+                  echo'<a href="login.php" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Login</a>';
+                }
+                ?>
+
             </div>
         </nav>
     </div>
@@ -110,7 +134,7 @@
         </div>
     </div>
     <!-- Carousel End -->
-    
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
@@ -129,12 +153,12 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="text-primary mb-4">Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="home.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-white mb-2" href="about.html"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                            <a class="text-white mb-2" href="service.html"><i class="fa fa-angle-right mr-2"></i>Our Services</a>   
-                            <a class="text-white" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Feedback</a>
+                            <a class="text-white mb-2" href="home.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-white mb-2" href="about.php"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                            <a class="text-white mb-2" href="service.php"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                            <a class="text-white" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Feedback</a>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,8 +167,8 @@
         <div class="row">
             <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                 <p class="m-0 text-white">
-                    &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. 
-					
+                    &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved.
+
 					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 					Designed by <a class="text-white font-weight-bold">Pet Emergency</a>
                 </p>
