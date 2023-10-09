@@ -1,3 +1,41 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$con = mysqli_connect('localhost', 'root', '', 'petsmile');
+
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_POST['login'])) {
+    $Cust_ID = $_POST['username'];
+    $Password = $_POST['password'];
+
+    $cmd = "SELECT * FROM memberAcc WHERE Cust_ID = '$Cust_ID' AND Password = '$Password' LIMIT 1";
+    $res = mysqli_query($con, $cmd);
+
+    if ($res) {
+        if (mysqli_num_rows($res) > 0) {
+            session_start();
+
+            $data = mysqli_fetch_assoc($res);
+
+            $_SESSION['Cust_ID'] = $data['Cust_ID'];
+
+            var_dump($_SESSION['Cust_ID']);
+
+            header('location:index.php');
+            exit();
+        } else {
+            echo '<div class="alert alert-danger"><strong>Login failed!</strong> Check username and password</div>';
+        }
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +44,7 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -62,14 +100,27 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
-                    <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="about.php" class="nav-item nav-link">About</a>
+                    <a href="service.php" class="nav-item nav-link">Service</a>
+                    <a href="bookinghistory.php" class="nav-item nav-link">Booking History</a>
+                    <div class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Booking</a>
+                      <div class="dropdown-menu rounded-0 m-0">
+                          <a href="boarding.php" class="dropdown-item">Pet Boarding</a>
+                          <a href="grooming.php" class="dropdown-item">Pet Grooming</a>
+                          <a href="treatment.php" class="dropdown-item">Pet Treatment</a>
+                      </div>
+                  </div>
+                    <a href="contact.php" class="nav-item nav-link active">Contact</a>
                 </div>
-                <a href="login.html" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Login</a>
+                <?php
+                if (isset($_SESSION['Cust_ID'])) {
+                    echo '<a href="edit-profile.php" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Hi, ' . $_SESSION['Cust_ID'] . '</a>';
+                } else {
+                  echo'<a href="login.php" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Login</a>';
+                }
+                ?>
             </div>
         </nav>
     </div>
@@ -86,7 +137,9 @@
             <div class="col-12 col-sm-8 mb-5">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <?php
+                    /*
+                    <form method='POST' action='login.php'>
                         <div class="control-group">
                             <input type="text" class="form-control p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
                             <p class="help-block text-danger"></p>
@@ -106,9 +159,23 @@
                         <div>
                             <button class="btn btn-primary" type="submit" id="loginButton">Login</button>
                             <button class="btn btn-primary" type="submit" id="signupButton">Signup</button>
-
                         </div>
                     </form>
+                    */
+                    if (!isset($_SESSION['Cust_ID'])) {
+                        // User is not logged in, display login form
+                        echo "<form method='POST' action='login.php'>";
+                        echo "    <label for='username'>Customer ID:</label>";
+                        echo "    <input type='text' name='username' required><br><br>";
+                        echo "    <label for='password'>Password:</label>";
+                        echo "    <input type='password' name='password' required><br><br>";
+                        echo "    <input type='submit' name='login' value='Login'>";
+                        echo "</form>";
+
+                        echo "<p>Don't have an account? <a href='register.php'>Register</a></p>";
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -134,12 +201,12 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="text-primary mb-4">Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="home.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-white mb-2" href="about.html"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                            <a class="text-white mb-2" href="service.html"><i class="fa fa-angle-right mr-2"></i>Our Services</a>   
-                            <a class="text-white" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Feedback</a>
+                            <a class="text-white mb-2" href="home.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-white mb-2" href="about.php"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                            <a class="text-white mb-2" href="service.php"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                            <a class="text-white" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Feedback</a>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,8 +215,8 @@
         <div class="row">
             <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                 <p class="m-0 text-white">
-                    &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. 
-					
+                    &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved.
+
 					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 					Designed by <a class="text-white font-weight-bold">Pet Emergency</a>
                 </p>
