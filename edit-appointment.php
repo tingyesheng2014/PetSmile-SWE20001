@@ -40,58 +40,6 @@ if (!$result || mysqli_num_rows($result) === 0) {
 }
 
 $appointmentData = mysqli_fetch_assoc($result);
-
-if (isset($_POST['updateAppointment'])) {
-
-    $petName = $_POST['petName'];
-    $staffName = $_POST['staffName'];
-
-    $selectedPetID = "SELECT Pet_ID FROM pet WHERE Pet_Name = '$petName'";
-    $petResult = mysqli_query($con, $selectedPetID);
-
-    if ($petResult && mysqli_num_rows($petResult) > 0) {
-        $petData = mysqli_fetch_assoc($petResult);
-        $petID = $petData['Pet_ID'];
-    } else {
-        die("Pet not found");
-    }
-
-    $selectedStaffID = "SELECT Staff_ID FROM staff WHERE Last_Name = '$staffName'";
-    $staffResult = mysqli_query($con, $selectedStaffID);
-
-    if ($staffResult && mysqli_num_rows($staffResult) > 0) {
-        $staffData = mysqli_fetch_assoc($staffResult);
-        $staffID = $staffData['Staff_ID'];
-    } else {
-        die("Staff not found");
-    }
-
-    if ($appointmentType === "Pet Grooming") {
-        $newDate = $_POST['new_date'];
-        $newTime = $_POST['new_time'];
-
-        $updateQuery = "UPDATE groomingAppt SET GAppt_Date = ?, GAppt_Time = ?, Pet_ID = ?, Staff_ID = ? WHERE GAppt_ID = ?";
-        $stmt = mysqli_prepare($con, $updateQuery);
-        mysqli_stmt_bind_param($stmt, 'ssiii', $newDate, $newTime, $petID, $staffID, $appointmentID);
-    } elseif ($appointmentType === "Pet Boarding") {
-        $newStartDate = $_POST['start_date'];
-        $newEndDate = $_POST['end_date'];
-
-        $updateQuery = "UPDATE boardingAppt SET BAppt_StartDate = ?, BAppt_EndDate = ?, Pet_ID = ?, Staff_ID = ? WHERE BAppt_ID = ?";
-        $stmt = mysqli_prepare($con, $updateQuery);
-        mysqli_stmt_bind_param($stmt, 'ssiii', $newStartDate, $newEndDate, $petID, $staffID, $appointmentID);
-    }
-
-    if (mysqli_stmt_execute($stmt)) {
-           $_SESSION['success_message'] = "Appointment updated successfully!";
-           header("Location: bookinghistory.php");
-           exit;
-       } else {
-           $_SESSION['error_message'] = "Failed to update the appointment: " . mysqli_error($con);
-           header("Location: bookinghistory.php");
-           exit;
-       }
-     }
 ?>
 
 
@@ -186,28 +134,27 @@ if (isset($_POST['updateAppointment'])) {
         <h1 class="display-4 m-0">Edit Appointment</h1>
 
         <!-- Display appointment details in a form for editing -->
-        <form action="edit-appointment.php" method="POST">
+        <form action="update-appointment.php" method="POST">
           <input type="hidden" name="appointmentID" value="<?php echo $appointmentID; ?>">
           <input type="hidden" name="appointmentType" value="<?php echo $appointmentType; ?>">
-            <div class="form-group">
-                <label for="petName">Select Pet:</label>
-                <select name="petName" id="petName" class="form-control">
-                    <option value="">Select a Pet</option>
-                    <?php
-                    $Cust_ID = $_SESSION['Cust_ID'];
-                    $selectPetQuery = "SELECT * FROM pet WHERE Cust_ID='$Cust_ID'";
-                    $petResult = mysqli_query($con, $selectPetQuery);
 
-                    while ($row = mysqli_fetch_assoc($petResult)) {
-                        $petID = $row['Pet_ID'];
-                        $petName = $row['Pet_Name'];
-                        // Check if this is the selected pet
-                        $selected = ($petID == $appointmentData['Pet_ID']) ? 'selected' : '';
-                        echo "<option value='$petID' $selected>$petName</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+            <?php
+            $petID = $appointmentData['Pet_ID'];
+            $selectPetQuery = "SELECT Pet_Name FROM pet WHERE Pet_ID = '$petID'";
+            $petResult = mysqli_query($con, $selectPetQuery);
+
+            if ($petResult && mysqli_num_rows($petResult) > 0) {
+                $petData = mysqli_fetch_assoc($petResult);
+                $petName = $petData['Pet_Name'];
+            } else {
+                $petName = "Pet Not Found";
+            }
+
+            echo '<div class="form-group">
+                        <label for="pet_name">Pet Name:</label>
+                        <input type="text" id="pet_name" name="pet_name" value="' . $petName . '" readonly>
+                    </div>';
+            ?>
 
             <?php
             $serviceID = $appointmentData['Service_ID'];
@@ -250,24 +197,23 @@ if (isset($_POST['updateAppointment'])) {
                         </div>';
             }
             ?>
-            <div class="form-group">
-                <label for="staffName">Select Staff:</label>
-                <select name="staffName" id="staffName" class="form-control">
-                    <option value="">Select A Staff</option>
-                    <?php
-                    $staffQuery = "SELECT * FROM staff";
-                    $staffResult = mysqli_query($con, $staffQuery);
+            <?php
+            $staffID = $appointmentData['Staff_ID'];
+            $selectStaffQuery = "SELECT Last_Name FROM staff WHERE Staff_ID = '$staffID'";
+            $staffResult = mysqli_query($con, $selectStaffQuery);
 
-                    while ($row = mysqli_fetch_assoc($staffResult)) {
-                        $staffID = $row['Staff_ID'];
-                        $staffName = $row['Last_Name'];
+            if ($staffResult && mysqli_num_rows($staffResult) > 0) {
+                $staffData = mysqli_fetch_assoc($staffResult);
+                $staffName = $staffData['Last_Name'];
+            } else {
+                $staffName = "Staff Not Found";
+            }
 
-                        $selected = ($staffID == $appointmentData['Staff_ID']) ? 'selected' : '';
-                        echo "<option value='$staffID' $selected>$staffName</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+            echo '<div class="form-group">
+                        <label for="staff_name">Staff Name:</label>
+                        <input type="text" id="staff_name" name="staff_name" value="' . $staffName . '" readonly>
+                    </div>';
+            ?>
 
             <input type="submit" name="updateAppointment" value="Update Appointment">
         </form>
