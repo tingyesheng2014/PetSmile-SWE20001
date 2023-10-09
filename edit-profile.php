@@ -173,7 +173,7 @@ $userData = mysqli_fetch_assoc($userResult);
 
     </form>
 
-    <a href="edit-pet.php" class="btn btn-lg btn-primary px-3 mt-3">Go to Pet Profile</a>
+    <a href="edit-petprofile.php" class="btn btn-lg btn-primary px-3 mt-3">Go to Pet Profile</a>
 
     <a href="logout.php" class="btn btn-primary btn-sm">Logout</a>
     <!-- Carousel End -->
