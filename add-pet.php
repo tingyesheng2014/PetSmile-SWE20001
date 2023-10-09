@@ -138,7 +138,7 @@ if (isset($_POST['addPet'])) {
         </div>
 
         <input type="submit" name="addPet" value="Add Pet">
-        <a href="edit-pet.php" class="btn btn-primary">Back to Pet Profile</a>
+        <a href="edit-petprofile.php" class="btn btn-primary">Back to Pet Profile</a>
     </form>
 
     <!-- Carousel End -->
