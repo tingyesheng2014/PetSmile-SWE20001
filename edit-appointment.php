@@ -53,7 +53,6 @@ if (isset($_POST['updateAppointment'])) {
         $petData = mysqli_fetch_assoc($petResult);
         $petID = $petData['Pet_ID'];
     } else {
-        // Handle the case when Pet_Name is not found
         die("Pet not found");
     }
 
@@ -64,12 +63,10 @@ if (isset($_POST['updateAppointment'])) {
         $staffData = mysqli_fetch_assoc($staffResult);
         $staffID = $staffData['Staff_ID'];
     } else {
-        // Handle the case when Last_Name is not found
         die("Staff not found");
     }
 
     if ($appointmentType === "Pet Grooming") {
-        // Handle grooming appointments
         $newDate = $_POST['new_date'];
         $newTime = $_POST['new_time'];
 
@@ -77,7 +74,6 @@ if (isset($_POST['updateAppointment'])) {
         $stmt = mysqli_prepare($con, $updateQuery);
         mysqli_stmt_bind_param($stmt, 'ssiii', $newDate, $newTime, $petID, $staffID, $appointmentID);
     } elseif ($appointmentType === "Pet Boarding") {
-        // Handle boarding appointments
         $newStartDate = $_POST['start_date'];
         $newEndDate = $_POST['end_date'];
 
@@ -86,86 +82,16 @@ if (isset($_POST['updateAppointment'])) {
         mysqli_stmt_bind_param($stmt, 'ssiii', $newStartDate, $newEndDate, $petID, $staffID, $appointmentID);
     }
 
-    if (mysqli_query($con, $updateQuery)) {
-        $_SESSION['success_message'] = "Appointment updated successfully!";
-        header("Location: bookinghistory.php");
-        exit;
-    } else {
-        $_SESSION['error_message'] = "Failed to update the appointment: " . mysqli_error($con);
-        header("Location: bookinghistory.php");
-        exit;
-    }
-}
-/*
-session_start();
-
-// Check if the form is submitted
-if (isset($_POST['updateAppointment'])) {
-    // Get the form data
-    $appointmentID = $_POST['appointmentID'];
-    $appointmentType = $_POST['appointmentType'];
-    $petName = $_POST['petName'];
-    $last_name = $_POST['last_name']; // Assuming this is the updated staff last name
-    // ... Other form data ...
-
-    // Connect to the database
-    $con = mysqli_connect('localhost', 'root', '', 'petsmile');
-
-    if (!$con) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    // Retrieve Pet_ID based on the updated Pet_Name
-    $selectPetQuery = "SELECT Pet_ID FROM pet WHERE Pet_Name = '$petName'";
-    $petResult = mysqli_query($con, $selectPetQuery);
-
-    if ($petResult && mysqli_num_rows($petResult) > 0) {
-        $petData = mysqli_fetch_assoc($petResult);
-        $petID = $petData['Pet_ID'];
-    } else {
-        // Handle the case when Pet_Name is not found
-        die("Pet not found");
-    }
-
-    // Retrieve Staff_ID based on the updated Last_Name
-    $selectStaffQuery = "SELECT Staff_ID FROM staff WHERE Last_Name = '$last_name'";
-    $staffResult = mysqli_query($con, $selectStaffQuery);
-
-    if ($staffResult && mysqli_num_rows($staffResult) > 0) {
-        $staffData = mysqli_fetch_assoc($staffResult);
-        $staffID = $staffData['Staff_ID'];
-    } else {
-        // Handle the case when Last_Name is not found
-        die("Staff not found");
-    }
-
-    // Now you have the Pet_ID and Staff_ID, you can proceed to update the appointment record
-    if ($appointmentType === "Pet Grooming") {
-        // Update grooming appointment table with Pet_ID, Staff_ID, and other data
-        $updateQuery = "UPDATE groomingAppt SET Pet_ID = '$petID', Staff_ID = '$staffID', ... WHERE GAppt_ID = '$appointmentID'";
-    } elseif ($appointmentType === "Pet Boarding") {
-        // Update boarding appointment table with Pet_ID, Staff_ID, and other data
-        $updateQuery = "UPDATE boardingAppt SET Pet_ID = '$petID', Staff_ID = '$staffID', ... WHERE BAppt_ID = '$appointmentID'";
-    } else {
-        // Handle the case when the appointment type is not recognized
-        die("Invalid appointment type");
-    }
-
-    // Execute the update query
-    if (mysqli_query($con, $updateQuery)) {
-        // Update successful
-        $_SESSION['success_message'] = "Appointment updated successfully!";
-    } else {
-        $_SESSION['error_message'] = "Failed to update the appointment. Please try again later.";
-    }
-
-    mysqli_close($con);
-}
-
-// Redirect back to the booking history page
-header("Location: bookinghistory.php");
-exit;
-*/
+    if (mysqli_stmt_execute($stmt)) {
+           $_SESSION['success_message'] = "Appointment updated successfully!";
+           header("Location: bookinghistory.php");
+           exit;
+       } else {
+           $_SESSION['error_message'] = "Failed to update the appointment: " . mysqli_error($con);
+           header("Location: bookinghistory.php");
+           exit;
+       }
+     }
 ?>
 
 
@@ -292,10 +218,9 @@ exit;
                 $serviceData = mysqli_fetch_assoc($serviceResult);
                 $serviceName = $serviceData['Service_Name'];
             } else {
-                $serviceName = "Service Not Found"; // Provide a default value or handle the case when service is not found
+                $serviceName = "Service Not Found";
             }
 
-            // Display the service name in a read-only text field
             echo '<div class="form-group">
                         <label for="service_name">Service Name:</label>
                         <input type="text" id="service_name" name="service_name" value="' . $serviceName . '" readonly>
@@ -336,7 +261,7 @@ exit;
                     while ($row = mysqli_fetch_assoc($staffResult)) {
                         $staffID = $row['Staff_ID'];
                         $staffName = $row['Last_Name'];
-                        // Check if this is the selected staff
+
                         $selected = ($staffID == $appointmentData['Staff_ID']) ? 'selected' : '';
                         echo "<option value='$staffID' $selected>$staffName</option>";
                     }
