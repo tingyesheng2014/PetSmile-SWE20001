@@ -184,7 +184,6 @@ if (isset($_SESSION['success_message'])) {
                       echo "<td>{$row['GAppt_Date']}</td>";
                       echo "<td>{$row['GAppt_Time']}</td>";
                       echo "<td>{$row['Status']}</td>";
-                      echo "<td><button class='btn btn-primary' onclick='editAppointment({$row['GAppt_ID']}, \"Pet Grooming\")'>Edit</button></td>";
                       echo "<td><button class='btn btn-danger' onclick='deleteAppointment({$row['GAppt_ID']}, \"Pet Grooming\")'>Delete</button></td>";
                       echo "</tr>";
                   }
@@ -218,7 +217,6 @@ if (isset($_SESSION['success_message'])) {
                       echo "<td>{$row['BAppt_StartDate']}</td>";
                       echo "<td>{$row['BAppt_EndDate']}</td>";
                       echo "<td>{$row['Status']}</td>";
-                      echo "<td><button class='btn btn-primary' onclick='editAppointment({$row['BAppt_ID']}, \"Pet Boarding\")'>Edit</button></td>";
                       echo "<td><button class='btn btn-danger' onclick='deleteAppointment({$row['BAppt_ID']}, \"Pet Boarding\")'>Delete</button></td>";
                       echo "</tr>";
                   }
@@ -235,23 +233,13 @@ if (isset($_SESSION['success_message'])) {
             }
             </script>
 
-            <script>
-            function editAppointment(appointmentID, appointmentType) {
-                if (appointmentType === "Pet Grooming") {
-                    window.location.href = `edit-appointment.php?appointmentID=${appointmentID}&appointmentType=${appointmentType}`;
-                } else if (appointmentType === "Pet Boarding") {
-                    window.location.href = `edit-appointment.php?appointmentID=${appointmentID}&appointmentType=${appointmentType}`;
-                }
-            }
-            </script>
-
         </div>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-4 col-md-12 mb-5">
-                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Lover</h1>
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Smile</h1>
                 <p class="m-0">Pet Smile is a trusted Subang Jaya pet shop, providing top-notch pet care services for over a decade. We offer boarding, grooming, and pet supplies, all driven by our love for animals and a commitment to excellent service.</p>
             </div>
             <div class="col-lg-8 col-md-12">

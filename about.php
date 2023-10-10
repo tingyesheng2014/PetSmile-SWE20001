@@ -106,8 +106,6 @@ if (!$con) {
             <div class="col-lg-7 pb-5 pb-lg-0 px-3 px-lg-5">
                 <h4 class="text-secondary mb-3">About Us</h4>
                 <h1 class="display-4 mb-4"><span class="text-primary">Boarding</span> & <span class="text-secondary">Daycare</span></h1>
-                <h5 class="text-muted mb-3">Amet stet amet ut. Sit no vero vero no dolor. Sed erat ut sea. Just clita ut stet kasd at diam sit erat vero sit.</h5>
-                <p class="mb-4">Dolores lorem lorem ipsum sit et ipsum. Sadip sea amet diam dolore sed et. Sit rebum labore sit sit ut vero no sit. Et elitr stet dolor sed sit et sed ipsum et kasd ut. Erat duo eos et erat sed diam duo</p>
                 <ul class="list-inline">
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Best In Industry</h5></li>
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Emergency Services</h5></li>
@@ -143,7 +141,6 @@ if (!$con) {
                 <div class="col-lg-7 py-5 py-lg-0 px-3 px-lg-5">
                     <h4 class="text-secondary mb-3">Why Choose Us?</h4>
                     <h1 class="display-4 mb-4"><span class="text-primary">Special Care</span> On Pets</h1>
-                    <p class="mb-4">Dolor lorem lorem ipsum sit et ipsum. Sadip sea amet diam sed ut vero no sit. Et elitr stet sed sit sed kasd. Erat duo eos et erat sed diam duo</p>
                     <div class="row py-2">
                         <div class="col-6">
                             <div class="d-flex align-items-center mb-4">
@@ -261,7 +258,7 @@ if (!$con) {
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-4 col-md-12 mb-5">
-                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Lover</h1>
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Smile</h1>
                 <p class="m-0">Pet Smile is a trusted Subang Jaya pet shop, providing top-notch pet care services for over a decade. We offer boarding, grooming, and pet supplies, all driven by our love for animals and a commitment to excellent service.</p>
             </div>
             <div class="col-lg-8 col-md-12">

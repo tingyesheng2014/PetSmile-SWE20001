@@ -110,7 +110,6 @@ if (!$con) {
                     <div class="d-flex flex-column text-center bg-white mb-2 p-3 p-sm-5">
                         <h3 class="flaticon-house display-3 font-weight-normal text-secondary mb-3"></h3>
                         <h3 class="mb-3">Pet Boarding</h3>
-                        <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo</p>
                         <a class="text-uppercase font-weight-bold" href="boarding.php">Read More</a>
                     </div>
                 </div>
@@ -118,7 +117,6 @@ if (!$con) {
                     <div class="d-flex flex-column text-center bg-white mb-2 p-3 p-sm-5">
                         <h3 class="flaticon-grooming display-3 font-weight-normal text-secondary mb-3"></h3>
                         <h3 class="mb-3">Pet Grooming</h3>
-                        <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo</p>
                         <a class="text-uppercase font-weight-bold" href="grooming.php">Read More</a>
                     </div>
                 </div>
@@ -126,7 +124,6 @@ if (!$con) {
                     <div class="d-flex flex-column text-center bg-white mb-2 p-3 p-sm-5">
                         <h3 class="flaticon-vaccine display-3 font-weight-normal text-secondary mb-3"></h3>
                         <h3 class="mb-3">Pet Treatment</h3>
-                        <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo</p>
                         <a class="text-uppercase font-weight-bold" href="treatment.php">Read More</a>
                     </div>
                 </div>
@@ -152,7 +149,6 @@ if (!$con) {
                             <i>Profession</i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
                 </div>
                 <div class="bg-light mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
@@ -162,7 +158,6 @@ if (!$con) {
                             <i>Profession</i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
                 </div>
                 <div class="bg-light mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
@@ -172,7 +167,6 @@ if (!$con) {
                             <i>Profession</i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
                 </div>
                 <div class="bg-light mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
@@ -182,7 +176,6 @@ if (!$con) {
                             <i>Profession</i>
                         </div>
                     </div>
-                    <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor ipsum sanct clita</p>
                 </div>
             </div>
         </div>
@@ -194,7 +187,7 @@ if (!$con) {
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-4 col-md-12 mb-5">
-                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Lover</h1>
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Smile</h1>
                 <p class="m-0">Pet Smile is a trusted Subang Jaya pet shop, providing top-notch pet care services for over a decade. We offer boarding, grooming, and pet supplies, all driven by our love for animals and a commitment to excellent service.</p>
             </div>
             <div class="col-lg-8 col-md-12">
