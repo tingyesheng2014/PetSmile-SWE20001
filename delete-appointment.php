@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'config.php';
 
 if (!isset($_SESSION['Cust_ID'])) {
     header("Location: login.php");
@@ -13,12 +13,6 @@ if (!isset($_GET['appointmentID']) || !isset($_GET['appointmentType'])) {
 
 $appointmentID = $_GET['appointmentID'];
 $appointmentType = $_GET['appointmentType'];
-
-$con = mysqli_connect('localhost', 'root', '', 'petsmile');
-
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 if ($appointmentType === "Pet Grooming") {
     $tableName = "groomingAppt";
