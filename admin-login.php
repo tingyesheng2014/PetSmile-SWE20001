@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
 
             var_dump($_SESSION['Staff_ID']);
 
-            header('location:admin-index.php');
+            header('location:admin.php');
             exit();
         } else {
             echo '<div class="alert alert-danger"><strong>Login failed!</strong> Check username and password</div>';
