@@ -248,8 +248,6 @@ if (isset($_GET['serviceID'])) {
             <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                 <p class="m-0 text-white">
                     &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved.
-
-					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 					Designed by <a class="text-white font-weight-bold">Pet Emergency</a>
                 </p>
             </div>
