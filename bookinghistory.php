@@ -27,10 +27,11 @@ $groomingAppointmentsQuery = "
         pet p ON g.Pet_ID = p.Pet_ID
     INNER JOIN
         service s ON g.Service_ID = s.Service_ID
-    INNER JOIN
+    LEFT JOIN
         staff st ON g.Staff_ID = st.Staff_ID
     WHERE
         p.Cust_ID = '$customerID'
+    ORDER BY g.GAppt_Date ASC;
 ";
 
 $groomingAppointmentsResult = mysqli_query($con, $groomingAppointmentsQuery);
@@ -50,10 +51,11 @@ $boardingAppointmentsQuery = "
         pet p ON b.Pet_ID = p.Pet_ID
     INNER JOIN
         service s ON b.Service_ID = s.Service_ID
-    INNER JOIN
+    LEFT JOIN
         staff st ON b.Staff_ID = st.Staff_ID
     WHERE
         p.Cust_ID = '$customerID'
+    ORDER BY b.BAppt_StartDate ASC;
 ";
 
 $boardingAppointmentsResult = mysqli_query($con, $boardingAppointmentsQuery);
