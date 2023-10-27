@@ -71,7 +71,7 @@
                       </div>
                     </div>
                     <a href="bookinghistory.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'bookinghistory.php') ? 'active' : ''; ?>">History</a>
-                    <a href="contact.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'active' : ''; ?>">Feedback</a>
+                    <a href="feedback.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'feedback.php') ? 'active' : ''; ?>">Feedback</a>
                 </div>
                 <?php
                 if (isset($_SESSION['Cust_ID'])) {
