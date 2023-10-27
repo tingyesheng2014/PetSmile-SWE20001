@@ -112,7 +112,8 @@ if (isset($_GET['serviceID'])) {
                   </select>
               </div>
                 <input type="hidden" name="serviceID" value="<?php echo $serviceID; ?>">
-                <input type="submit" value="Book Now">
+                <input type="submit" value="Book Now" class="btn btn-primary px-3 mt-3">
+
             </form>
           </div>
         </div>
