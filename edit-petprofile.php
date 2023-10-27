@@ -21,6 +21,19 @@ if (isset($_POST['update'])) {
     }
 }
 
+if (isset($_GET['delete'])) {
+    $petIDToDelete = $_GET['delete'];
+    $Cust_ID = $_SESSION['Cust_ID'];
+
+    $deletePetQuery = "DELETE FROM pet WHERE Pet_ID = '$petIDToDelete' AND Cust_ID = '$Cust_ID'";
+
+    if (mysqli_query($con, $deletePetQuery)) {
+        echo '<div class="alert alert-success"><strong>Pet deleted successfully!</strong></div>';
+    } else {
+        echo '<div class="alert alert-danger"><strong>Pet deletion failed!</strong> Please try again later.</div>';
+    }
+}
+
 $Cust_ID = $_SESSION['Cust_ID'];
 $selectPetQuery = "SELECT * FROM pet WHERE Cust_ID='$Cust_ID'";
 $petResult = mysqli_query($con, $selectPetQuery);
@@ -28,55 +41,58 @@ $petData = mysqli_fetch_assoc($petResult);
 ?>
 
     <!-- Carousel Start -->
-    <form method="POST" action="edit-petprofile.php">
-        <h2>Edit Pet Profile</h2>
+    <body>
+      <div class="container text-center mt-5">
+        <h2 class="display-4 m-0">Pet <span class="text-primary">Profile</span></h2>
+        <h3>Edit Pet Details</h3>
+      </div>
 
-        <h3>Pet Details</h3>
+        <div class="container">
+            <form method="POST" action="edit-petprofile.php">
+                <div class="form-group">
+                    <label for="petToEdit">Select Pet:</label>
+                    <select name="petToEdit" id="petToEdit" class="form-control">
+                        <option value="">Select a Pet</option>
+                        <?php
+                        $Cust_ID = $_SESSION['Cust_ID'];
+                        $selectPetQuery = "SELECT * FROM pet WHERE Cust_ID='$Cust_ID'";
+                        $petResult = mysqli_query($con, $selectPetQuery);
 
-        <!-- Pet selection dropdown -->
-        <div class="form-group">
-            <label for="petToEdit">Select Pet:</label>
-            <select name="petToEdit" id="petToEdit" class="form-control">
-              <option value="">Select a Pet</option>
-                <?php
-                $Cust_ID = $_SESSION['Cust_ID'];
-                $selectPetQuery = "SELECT * FROM pet WHERE Cust_ID='$Cust_ID'";
-                $petResult = mysqli_query($con, $selectPetQuery);
+                        while ($row = mysqli_fetch_assoc($petResult)) {
+                            $petID = $row['Pet_ID'];
+                            $petName = $row['Pet_Name'];
+                            echo "<option value='$petID'>$petName</option>";
+                        }
+                        ?>
+                    </select>
+                    <a href="edit-petprofile.php?delete=<?= $petID; ?>" class="btn btn-danger" onclick="return confirm('Delete this pet?');">Delete</a>
+                </div>
 
-                while ($row = mysqli_fetch_assoc($petResult)) {
-                    $petID = $row['Pet_ID'];
-                    $petName = $row['Pet_Name'];
-                    echo "<option value='$petID'>$petName</option>";
-                }
-                ?>
-            </select>
+                <div id="petDetails" class="form-group">
+                    <label for="petid">Pet ID:</label>
+                    <input type="text" name="petid" id="petid" value="" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="petname">Pet Name:</label>
+                    <input type="text" name="petname" id="petname" value="">
+                </div>
+                <div class="form-group">
+                    <label for="petsex">Pet Sex:</label>
+                    <input type="text" name="petsex" id="petsex" value="">
+                </div>
+                <div class="form-group">
+                    <label for="petbreed">Pet Breed:</label>
+                    <input type="text" name="petbreed" id="petbreed" value="">
+                </div>
+
+                <input type="submit" name="update" value="Update Profile" class="btn btn-primary px-3 mt-3">
+                <a href="add-pet.php" class="btn btn-success mt-3">Add New Pet</a>
+            </form>
         </div>
 
-        <!-- Pet details -->
-        <div id="petDetails">
-            <div>
-                <label for="petid">Pet ID:</label>
-                <input type="text" name="petid" id="petid" value="">
-            </div>
-            <div>
-                <label for="petname">Pet Name:</label>
-                <input type="text" name="petname" id="petname" value="">
-            </div>
-            <div>
-                <label for="petsex">Pet Sex:</label>
-                <input type="text" name="petsex" id="petsex" value="">
-            </div>
-            <div>
-                <label for="petbreed">Pet Breed:</label>
-                <input type="text" name="petbreed" id="petbreed" value="">
-            </div>
+        <div class="container text-center mt-3">
+            <a href="edit-profile.php" class="btn btn-lg btn-primary px-3">Go to My Profile</a>
         </div>
-
-        <input type="submit" name="update" value="Update Profile">
-        <a href="edit-profile.php" class="btn btn-lg btn-primary px-3 mt-3">Go to My Profile</a>
-
-        <a href="add-pet.php" class="btn btn-success mt-3">Add New Pet</a>
-    </form>
 
     <!-- JavaScript to fetch and display pet details -->
     <script>
@@ -100,6 +116,7 @@ $petData = mysqli_fetch_assoc($petResult);
             xhr.send('petID=' + selectedPetID);
         });
     </script>
+  </body>
 
     <!-- Carousel End -->
 
