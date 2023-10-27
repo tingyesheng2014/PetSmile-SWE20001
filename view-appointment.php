@@ -38,9 +38,11 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
             exit;
         }
 
-        echo "<div class='container'>";
-        echo "<h1 class='display-4 m-0'>Viewing <span class='text-primary'>Appointment Details</span></h1>";
+        echo "<div class='container text-center mt-5'>";
+        echo "<h2 class='display-4 m-0'>Appointment <span class='text-primary'>Details</span></h2>";
+        echo "</div>";
 
+        echo "<div class='container'>";
         if ($appointmentType === "Pet Grooming") {
             echo "<p><strong>Appointment Type:</strong> Pet Grooming</p>";
             echo "<p><strong>Appointment Date:</strong> " . $appointmentData['GAppt_Date'] . "</p>";
@@ -55,10 +57,13 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
         echo "<p><strong>Staff:</strong> " . $appointmentData['Staff_Name'] . "</p>";
         echo "<p><strong>Status:</strong> " . $appointmentData['Status'] . "</p>";
 
-        echo "<a href='bookinghistory.php' class='btn btn-secondary'>Back to Booking History</a>";
         echo "<a href='cancel-appointment.php?appointmentID=$appointmentID&appointmentType=$appointmentType' class='btn btn-danger'>Cancel Appointment</a>";
-
         echo "</div>";
+
+        echo "<div class='container text-center mt-3'>";
+        echo "<a href='bookinghistory.php' class='btn btn-secondary'>Back to Booking History</a>";
+        echo "</div>";
+
     } else {
         echo "Invalid appointment type.";
         exit;
