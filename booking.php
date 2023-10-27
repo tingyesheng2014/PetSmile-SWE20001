@@ -34,10 +34,18 @@ if (isset($_GET['serviceID'])) {
 ?>
 
     <body>
-        <div class="container">
+        <div class="container text-center mt-5">
           <h1 class="display-4 m-0">Booking <span class="text-primary">Details</span></h1>
+        </div>
+
+        <div class="container d-flex justify-content-center align-items-center mt-4">
+                <div class="text-center">
+                    <img src="img/<?php echo $imageFileName; ?>" alt="<?php echo $serviceName; ?>" style="max-width: 500px;">
+                </div>
+            </div>
+
+        <div class="container mt-4">
             <?php
-            echo "<img src='img/$imageFileName' alt='$serviceName' style='max-width: 500px;'><br>";
             echo "<p><strong>Service Name:</strong> $serviceName</p>";
             echo "<p><strong>Description:</strong> $serviceDesc</p>";
             echo "<p><strong>Price:</strong> $price</p>";
@@ -60,7 +68,6 @@ if (isset($_GET['serviceID'])) {
                         ?>
                     </select>
                 </div>
-
 
                 <?php
                 if ($serviceType === "Pet Boarding") {
@@ -91,6 +98,7 @@ if (isset($_GET['serviceID'])) {
                   <label for="staffName">Select Staff:</label>
                   <select name="staffName" id="staffName" class="form-control">
                       <option selected>Select A Staff</option>
+                      <option value="any">Any Staff</option>
                       <?php
                       $staffQuery = "SELECT * FROM staff";
                       $staffResult = mysqli_query($con, $staffQuery);
@@ -103,10 +111,10 @@ if (isset($_GET['serviceID'])) {
                       ?>
                   </select>
               </div>
-
                 <input type="hidden" name="serviceID" value="<?php echo $serviceID; ?>">
                 <input type="submit" value="Book Now">
             </form>
+          </div>
         </div>
     </body>
 
