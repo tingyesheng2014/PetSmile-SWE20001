@@ -16,7 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $petName = mysqli_real_escape_string($con, $_POST['petName']);
     $serviceID = mysqli_real_escape_string($con, $_POST['serviceID']);
+
     $staffName = mysqli_real_escape_string($con, $_POST['staffName']);
+    if ($staffName === "any") {
+        $staffName = null;
+    }
+
     $customerID = $_SESSION['Cust_ID'];
 
     $getServiceTypeQuery = "SELECT Service_Type FROM service WHERE Service_ID = '$serviceID'";
