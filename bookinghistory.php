@@ -85,7 +85,7 @@ if (isset($_SESSION['success_message'])) {
             </form>
 
             <h2 class="mt-4">Pet Grooming Appointments</h2>
-            <table class="table">
+            <table class="table" id="groomingTable">
                 <thead>
                     <tr>
                         <th>Grooming Appointment ID</th>
@@ -118,7 +118,7 @@ if (isset($_SESSION['success_message'])) {
             </table>
 
             <h2 class="mt-4">Pet Boarding Appointments</h2>
-            <table class="table">
+            <table class="table" id="boardingTable">
                 <thead>
                     <tr>
                         <th>Boarding Appointment ID</th>
@@ -155,6 +155,31 @@ if (isset($_SESSION['success_message'])) {
                     window.location.href = `view-appointment.php?appointmentID=${appointmentID}&appointmentType=${appointmentType}`;
                 }
             </script>
+
+            <script>
+            function showAppointments(bookingType) {
+                var groomingTable = document.getElementById('groomingTable');
+                var boardingTable = document.getElementById('boardingTable');
+
+                if (bookingType === 'Pet Grooming Appointment') {
+                    groomingTable.style.display = 'table';
+                    boardingTable.style.display = 'none';
+                } else if (bookingType === 'Pet Boarding Appointment') {
+                    groomingTable.style.display = 'none';
+                    boardingTable.style.display = 'table';
+                } else {
+                    groomingTable.style.display = 'table';
+                    boardingTable.style.display = 'table';
+                }
+            }
+
+            document.getElementById('historyForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var bookingType = document.getElementById('bookingType').value;
+                showAppointments(bookingType);
+            });
+        </script>
 
         </div>
 
