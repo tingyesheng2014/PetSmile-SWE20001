@@ -1,0 +1,32 @@
+<clients>
+  <client>
+    <name>Sam Huynh</name>
+    <appointment>
+      <physiotherapist>Bruno</physiotherapist>
+      <date>Monday, 17 April 2023</date>
+      <time>9:00 am</time>
+      <duration>30 minutes</duration>
+      <reason>Rehabilitating after a broken wrist</reason>
+    </appointment>
+  </client>
+  <client>
+    <name>Andrea Kostyanska</name>
+    <appointment>
+      <physiotherapist>Sylvia</physiotherapist>
+      <date>Tuesday, 18 April 2023</date>
+      <time>3:30 pm</time>
+      <duration>30 minutes</duration>
+      <reason>Problem with lumbar spine</reason>
+    </appointment>
+  </client>
+  <client>
+    <name>Philip Chen</name>
+    <appointment>
+      <physiotherapist>Bruno</physiotherapist>
+      <date>Tuesday, 18 April 2023</date>
+      <time>10:30 pm</time>
+      <duration>40 minutes</duration>
+      <reason>Problem with neck</reason>
+    </appointment>
+  </client>
+</clients>
