@@ -15,13 +15,13 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
             $appointmentQuery = "SELECT g.*, s.Service_Name, st.Last_Name AS Staff_Name
                                  FROM groomingAppt g
                                  INNER JOIN service s ON g.Service_ID = s.Service_ID
-                                 INNER JOIN staff st ON g.Staff_ID = st.Staff_ID
+                                 LEFT JOIN staff st ON g.Staff_ID = st.Staff_ID
                                  WHERE g.GAppt_ID = '$appointmentID'";
         } elseif ($appointmentType === "Pet Boarding") {
             $appointmentQuery = "SELECT b.*, s.Service_Name, st.Last_Name AS Staff_Name
                                  FROM boardingAppt b
                                  INNER JOIN service s ON b.Service_ID = s.Service_ID
-                                 INNER JOIN staff st ON b.Staff_ID = st.Staff_ID
+                                 LEFT JOIN staff st ON b.Staff_ID = st.Staff_ID
                                  WHERE b.BAppt_ID = '$appointmentID'";
         }
 
