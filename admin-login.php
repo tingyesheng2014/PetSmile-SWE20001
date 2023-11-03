@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-include 'header.php';
+include 'admin-header.php';
 
 $con = mysqli_connect('localhost', 'root', '', 'petsmile');
 
@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
 
             var_dump($_SESSION['Staff_ID']);
 
-            header('location:admin.php');
+            header('location:admin-bookinghistory.php');
             exit();
         } else {
             echo '<div class="alert alert-danger"><strong>Login failed!</strong> Check username and password</div>';
