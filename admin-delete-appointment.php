@@ -1,13 +1,8 @@
 <?php
 include 'config.php';
 
-if (!isset($_SESSION['Cust_ID'])) {
-    header("Location: login.php");
-    exit;
-}
-
 if (!isset($_GET['appointmentID']) || !isset($_GET['appointmentType'])) {
-    header("Location: bookinghistory.php");
+    header("Location: admin-bookinghistory.php");
     exit;
 }
 
@@ -21,7 +16,7 @@ if ($appointmentType === "Pet Grooming") {
     $tableName = "boardingAppt";
     $idColumn = "BAppt_ID";
 } else {
-    header("Location: bookinghistory.php");
+    header("Location: admin-bookinghistory.php");
     exit;
 }
 
@@ -35,6 +30,6 @@ if (mysqli_query($con, $deleteQuery)) {
 
 mysqli_close($con);
 
-header("Location: bookinghistory.php");
+header("Location: admin-bookinghistory.php");
 exit;
 ?>
