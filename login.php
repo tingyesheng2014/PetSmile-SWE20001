@@ -40,7 +40,7 @@ if (isset($_POST['login'])) {
             <h1 class="display-4 m-0">Lo<span class="text-primary">gin</span></h1>
         </div>
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-8 mb-5">
+            <div class="col-6 mb-5 mx-auto text-center">
                 <div class="contact-form">
                     <div id="success"></div>
                     <?php
@@ -68,20 +68,26 @@ if (isset($_POST['login'])) {
                         </div>
                     </form>
                     */
-                    if (!isset($_SESSION['Cust_ID'])) {
-                        echo "<form method='POST' action='login.php'>";
-                        echo "    <label for='username'>Customer ID:</label>";
-                        echo "    <input type='text' name='username' required><br><br>";
-                        echo "    <label for='password'>Password:</label>";
-                        echo "    <input type='password' name='password' required><br><br>";
-                        echo "    <input type='submit' name='login' value='Login'>";
-                        echo "</form>";
+                    if (!isset($_SESSION['Cust_ID'])) { ?>
+                        <form method='POST' action='login.php'>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form2Example1">Username</label>
+                                <input type="text" id="form2Example1" class="form-control" name="username"/>
+                            </div>
 
-                        echo "<p>Don't have an account? <a href='register.php'>Register</a></p>";
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form2Example2">Password</label>
+                                <input type="password" id="form2Example2" class="form-control" name="password"/>
+                            </div>
+                            <input class="btn btn-primary" type='submit' name='login' value='Login'>
+                        </form>
 
-                        echo "<a href='admin-login.php'>Go to Admin Login</a>";
-                    }
-                    ?>
+                        <p>Don't have an account?? <a href='register.php'>Register</a></p>
+
+                        <a href='admin-login.php'>Go to Admin Login</a>
+                    <?php }?>
 
                 </div>
             </div>
