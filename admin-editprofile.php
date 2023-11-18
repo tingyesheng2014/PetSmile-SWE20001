@@ -21,11 +21,11 @@ if (isset($_POST['update'])) {
     $Address = $_POST['address'];
     $City = $_POST['city'];
     $Postcode = $_POST['postcode'];
-    $Email = $_POST['email'];
+    $Position = $_POST['position'];
 
-    $updateUserQuery = "UPDATE staff SET First_Name='$First_Name', Last_Name='$Last_Name', Phone_No='$Phone_No', Address='$Address', City='$City', Postcode='$Postcode', Email='$Email' WHERE Staff_ID='$Staff_ID'";
+    $updateStaffQuery = "UPDATE staff SET First_Name='$First_Name', Last_Name='$Last_Name', Phone_No='$Phone_No', Address='$Address', City='$City', Postcode='$Postcode', Position='$Position' WHERE Staff_ID='$Staff_ID'";
 
-    if (mysqli_query($con, $updateUserQuery)) {
+    if (mysqli_query($con, $updateStaffQuery)) {
         echo '<div class="alert alert-success"><strong>Profile updated successfully!</strong></div>';
     } else {
         echo '<div class="alert alert-danger"><strong>Profile update failed!</strong> Please try again later.</div>';
@@ -33,9 +33,9 @@ if (isset($_POST['update'])) {
 }
 
 $Staff_ID = $_SESSION['Staff_ID'];
-$selectUserQuery = "SELECT * FROM staff WHERE Staff_ID='$Staff_ID'";
-$userResult = mysqli_query($con, $selectUserQuery);
-$userData = mysqli_fetch_assoc($userResult);
+$selectStaffQuery = "SELECT * FROM staff WHERE Staff_ID='$Staff_ID'";
+$staffResult = mysqli_query($con, $selectStaffQuery);
+$staffData = mysqli_fetch_assoc($staffResult);
 ?>
 
     <!-- Carousel Start -->
@@ -46,23 +46,23 @@ $userData = mysqli_fetch_assoc($userResult);
     </div>
 
     <div class="container">
-        <form method="POST" action="edit-profile.php">
+        <form method="POST" action="admin-editprofile.php">
             <div class="form-group">
-                <label for="custid">Staff ID:</label>
-                <input type="text" name="custid" id="custid" value="<?php echo $userData['Staff_ID']; ?>" class="form-control"
+                <label for="staffid">Staff ID:</label>
+                <input type="text" name="staffid" id="staffid" value="<?php echo $staffData['Staff_ID']; ?>" class="form-control"
                     required readonly>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="firstname">First Name:</label>
-                    <input type="text" name="firstname" id="firstname" value="<?php echo $userData['First_Name']; ?>"
+                    <input type="text" name="firstname" id="firstname" value="<?php echo $staffData['First_Name']; ?>"
                         class="form-control" required>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="lastname">Last Name:</label>
-                    <input type="text" name="lastname" id="lastname" value="<?php echo $userData['Last_Name']; ?>"
+                    <input type="text" name="lastname" id="lastname" value="<?php echo $staffData['Last_Name']; ?>"
                         class="form-control" required>
                 </div>
             </div>
@@ -70,33 +70,33 @@ $userData = mysqli_fetch_assoc($userResult);
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="phoneno">Phone Number:</label>
-                    <input type="tel" name="phoneno" id="phoneno" value="<?php echo $userData['Phone_No']; ?>"
+                    <input type="tel" name="phoneno" id="phoneno" value="<?php echo $staffData['Phone_No']; ?>"
                         class="form-control" required>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" value="<?php echo $userData['Email']; ?>"
+                    <label for="position">Position:</label>
+                    <input type="position" name="position" id="position" value="<?php echo $staffData['Position']; ?>"
                         class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" name="address" id="address" value="<?php echo $userData['Address']; ?>"
+                <input type="text" name="address" id="address" value="<?php echo $staffData['Address']; ?>"
                     class="form-control" required>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
-                    <input type="text" name="city" id="city" value="<?php echo $userData['City']; ?>" class="form-control"
+                    <input type="text" name="city" id="city" value="<?php echo $staffData['City']; ?>" class="form-control"
                         required>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="postcode">Postcode:</label>
-                    <input type="text" name="postcode" id="postcode" value="<?php echo $userData['Postcode']; ?>"
+                    <input type="text" name="postcode" id="postcode" value="<?php echo $staffData['Postcode']; ?>"
                         class="form-control" required>
                 </div>
             </div>
