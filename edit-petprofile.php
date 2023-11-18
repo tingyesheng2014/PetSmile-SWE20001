@@ -68,22 +68,32 @@ $petData = mysqli_fetch_assoc($petResult);
                     <a href="edit-petprofile.php?delete=<?= $petID; ?>" class="btn btn-danger" onclick="return confirm('Delete this pet?');">Delete</a>
                 </div>
 
+                <form method="POST" action="add-pet.php">
+                <div class="container">
                 <div id="petDetails" class="form-group">
                     <label for="petid">Pet ID:</label>
-                    <input type="text" name="petid" id="petid" value="" readonly>
+                    <input type="text" name="petid" id="petid" class="form-control"value="" readonly>
                 </div>
+                
+
                 <div class="form-group">
                     <label for="petname">Pet Name:</label>
-                    <input type="text" name="petname" id="petname" value="">
+                    <input type="text" name="petname" id="petname" class="form-control" required>
                 </div>
+
                 <div class="form-group">
                     <label for="petsex">Pet Sex:</label>
-                    <input type="text" name="petsex" id="petsex" value="">
+                    <input type="text" name="petsex" id="petsex" class="form-control" required>
                 </div>
+
                 <div class="form-group">
                     <label for="petbreed">Pet Breed:</label>
-                    <input type="text" name="petbreed" id="petbreed" value="">
+                    <input type="text" name="petbreed" id="petbreed" class="form-control" required>
                 </div>
+
+                <input type="submit" name="addPet" value="Add Pet" class="btn btn-success mt-3">
+            </form>
+        </div>
 
                 <input type="submit" name="update" value="Update Profile" class="btn btn-primary px-3 mt-3">
                 <a href="add-pet.php" class="btn btn-success mt-3">Add New Pet</a>

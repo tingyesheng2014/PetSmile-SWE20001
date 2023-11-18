@@ -33,17 +33,17 @@ if (isset($_POST['addPet'])) {
                 <!-- Pet details -->
                 <div>
                     <label for="petname">Pet Name:</label>
-                    <input type="text" name="petname" id="petname" required>
+                    <input type="text" name="petname" id="petname" class="form-control" required>
                 </div>
 
                 <div>
                     <label for="petsex">Pet Sex:</label>
-                    <input type="text" name="petsex" id="petsex" required>
+                    <input type="text" name="petsex" id="petsex" class="form-control" required>
                 </div>
 
                 <div>
                     <label for="petbreed">Pet Breed:</label>
-                    <input type="text" name="petbreed" id="petbreed" required>
+                    <input type="text" name="petbreed" id="petbreed"class="form-control"  required>
                 </div>
 
                 <input type="submit" name="addPet" value="Add Pet" class="btn btn-success mt-3">
