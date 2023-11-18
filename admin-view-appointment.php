@@ -3,7 +3,7 @@
 
 <?php
 include 'config.php';
-include 'header.php';
+include 'admin-header.php';
 
 if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
     $appointmentID = $_GET['appointmentID'];
