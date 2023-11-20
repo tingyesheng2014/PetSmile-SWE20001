@@ -47,12 +47,8 @@ $StaffID = $_SESSION['Staff_ID'];
 </head>
 <body>
     <div class="container">
-        <h1>Heloo welcome back</h1>
+        <h1>Hello welcome back</h1>
         <div class="dashboard-card">
-            <div>
-                <h3>Staff Name</h3>
-                <p><?php echo ('Staff1');  ?></p>
-            </div>
             <div>
                 <h3>User</h3>
                 <p><?php echo date('2'); ?> </p>
@@ -69,11 +65,7 @@ $StaffID = $_SESSION['Staff_ID'];
             </div>
             <div>
                 <h3>Sales</h3>
-                <p>RM<?php echo date('36000'); ?> </p>
-            </div>
-            <div>
-                <h3>Product</h3>
-                <p><?php echo date('1'); ?> </p>
+                <p>RM<?php echo date('50'); ?> </p>
             </div>
         </div>
         <div class="dashboard-card">
@@ -84,10 +76,6 @@ $StaffID = $_SESSION['Staff_ID'];
             <div>
             <h3>Boarding appointment</h3>
             <p><?php echo date('6'); ?> </p>
-            </div>
-            <div>
-                <h3>Earn</h3>
-                <p>RM<?php echo date('40000'); ?></p>
             </div>
         </div>
     </div>
