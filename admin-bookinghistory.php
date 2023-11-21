@@ -86,6 +86,18 @@ if (isset($_SESSION['success_message'])) {
                         <option>Pet Boarding Appointment</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="status">Select Status:</label>
+                    <select name="status" id="status" class="form-control">
+                        <option>All Status</option>
+                        <option>Pending</option>
+                        <option>Approved</option>
+                        <option>Rejected</option>
+                        <option>Canceled</option>
+                    </select>
+                </div>
+
                 <input type="submit" value="Show History" class="btn btn-primary">
             </form>
 
@@ -166,29 +178,50 @@ if (isset($_SESSION['success_message'])) {
             </script>
 
             <script>
-            function showAppointments(bookingType) {
-                var groomingTable = document.getElementById('groomingTable');
-                var boardingTable = document.getElementById('boardingTable');
+            function showAppointments(bookingType, status) {
+            var groomingTable = document.getElementById('groomingTable');
+            var boardingTable = document.getElementById('boardingTable');
 
-                if (bookingType === 'Pet Grooming Appointment') {
-                    groomingTable.style.display = 'table';
-                    boardingTable.style.display = 'none';
-                } else if (bookingType === 'Pet Boarding Appointment') {
-                    groomingTable.style.display = 'none';
-                    boardingTable.style.display = 'table';
+            if (bookingType === 'Pet Grooming Appointment') {
+                filterTable(groomingTable, status);
+                groomingTable.style.display = 'table';
+                boardingTable.style.display = 'none';
+            } else if (bookingType === 'Pet Boarding Appointment') {
+                filterTable(boardingTable, status);
+                boardingTable.style.display = 'table';
+                groomingTable.style.display = 'none';
+            } else {
+                filterTable(groomingTable, status);
+                filterTable(boardingTable, status);
+                groomingTable.style.display = 'table';
+                boardingTable.style.display = 'table';
+            }
+        }
+
+        function filterTable(table, status) {
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var cell = row.getElementsByTagName('td')[7];
+                var cellValue = cell.textContent || cell.innerText;
+
+                if (status === 'All Status' || cellValue === status) {
+                    row.style.display = '';
                 } else {
-                    groomingTable.style.display = 'table';
-                    boardingTable.style.display = 'table';
+                    row.style.display = 'none';
                 }
             }
+        }
 
-            document.getElementById('historyForm').addEventListener('submit', function (e) {
-                e.preventDefault();
+        document.getElementById('historyForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-                var bookingType = document.getElementById('bookingType').value;
-                showAppointments(bookingType);
-            });
-        </script>
+            var bookingType = document.getElementById('bookingType').value;
+            var status = document.getElementById('status').value;
+            showAppointments(bookingType, status);
+        });
+    </script>
 
         </div>
 
