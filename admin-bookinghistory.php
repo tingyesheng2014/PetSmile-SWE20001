@@ -95,6 +95,7 @@ if (isset($_SESSION['success_message'])) {
                         <option>Approved</option>
                         <option>Rejected</option>
                         <option>Canceled</option>
+                        <option>Completed</option>
                     </select>
                 </div>
 
