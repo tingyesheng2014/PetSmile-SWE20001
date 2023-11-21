@@ -64,6 +64,7 @@
                     <a href="sales.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'sales.php') ? 'active' : ''; ?>">Sales</a>
                     <a href="supplies.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'supplies.php') ? 'active' : ''; ?>">Inventory</a>
                     <a href="admin-bookinghistory.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'admin-bookinghistory.php') ? 'active' : ''; ?>">Booking History</a>
+                    <a href="admin-checkin-checkout.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'admin-checkin-checkout.php') ? 'active' : ''; ?>">Check In/Out</a>
                 </div>
                 <?php
                 if (isset($_SESSION['Staff_ID'])) {
