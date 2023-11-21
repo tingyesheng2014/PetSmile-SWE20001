@@ -147,6 +147,7 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
                             <option value="Approved" ' . ($appointmentData['Status'] == 'Approved' ? 'selected' : '') . '>Approved</option>
                             <option value="Rejected" ' . ($appointmentData['Status'] == 'Rejected' ? 'selected' : '') . '>Rejected</option>
                             <option value="Canceled" ' . ($appointmentData['Status'] == 'Canceled' ? 'selected' : '') . '>Canceled</option>
+                            <option value="Completed" ' . ($appointmentData['Status'] == 'Completed' ? 'selected' : '') . '>Completed</option>
                         </select>
                       </div>';
 
