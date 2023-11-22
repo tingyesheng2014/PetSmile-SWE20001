@@ -80,6 +80,8 @@ $treatmentAppointmentsQuery = "
         staff st ON t.Staff_ID = st.Staff_ID
     LEFT JOIN
         member c ON p.Cust_ID = c.Cust_ID
+    WHERE
+        p.Cust_ID = '$customerID'
     ORDER BY t.TAppt_Date ASC;
 ";
 
