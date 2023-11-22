@@ -36,7 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bookingDate = mysqli_real_escape_string($con, $_POST['bookingDate']);
         $bookingTime = mysqli_real_escape_string($con, $_POST['bookingTime']);
         $insertBookingQuery = "INSERT INTO $table (Pet_ID, Service_ID, Staff_ID, GAppt_Date, GAppt_Time) VALUES ('$petName', '$serviceID', '$staffName', '$bookingDate', '$bookingTime')";
-    } else if ($serviceType === "Pet Boarding"){
+    }
+    if ($serviceType === "Pet Treatment") {
+        $table = "treatmentAppt";
+        $bookingDate = mysqli_real_escape_string($con, $_POST['bookingDate']);
+        $bookingTime = mysqli_real_escape_string($con, $_POST['bookingTime']);
+        $insertBookingQuery = "INSERT INTO $table (Pet_ID, Service_ID, Staff_ID, TAppt_Date, TAppt_Time) VALUES ('$petName', '$serviceID', '$staffName', '$bookingDate', '$bookingTime')";
+    }
+    else if ($serviceType === "Pet Boarding"){
         $table = "boardingAppt";
         $boardingStartDate = mysqli_real_escape_string($con, $_POST['boardingStartDate']);
         $boardingEndDate = mysqli_real_escape_string($con, $_POST['boardingEndDate']);
