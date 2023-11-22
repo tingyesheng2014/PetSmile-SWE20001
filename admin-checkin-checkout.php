@@ -44,9 +44,9 @@ if (isset($_SESSION['success_message'])) {
 ?>
 
 <div class="container">
-    <h1 class="display-4 m-0">Manage <span class="text-primary">Boarding Appointments</span></h1>
+    <h1 class="display-4 m-0">Pet <span class="text-primary">Boarding</span></h1>
 
-    <h2 class="mt-4">Pet Boarding Appointments</h2>
+    <h2 class="mt-4">Manage Pet Boarding</h2>
     <table class="table">
         <thead>
             <tr>
