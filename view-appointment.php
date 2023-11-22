@@ -9,7 +9,7 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
     $appointmentID = $_GET['appointmentID'];
     $appointmentType = $_GET['appointmentType'];
 
-    if ($appointmentType === "Pet Grooming" || $appointmentType === "Pet Boarding") {
+    if ($appointmentType === "Pet Grooming" || $appointmentType === "Pet Boarding" || $appointmentType === "Pet Treatment") {
         $appointmentQuery = "";
         if ($appointmentType === "Pet Grooming") {
             $appointmentQuery = "SELECT g.*, s.Service_Name, st.Last_Name AS Staff_Name
@@ -17,6 +17,12 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
                                  INNER JOIN service s ON g.Service_ID = s.Service_ID
                                  LEFT JOIN staff st ON g.Staff_ID = st.Staff_ID
                                  WHERE g.GAppt_ID = '$appointmentID'";
+        } if ($appointmentType === "Pet Treatment") {
+            $appointmentQuery = "SELECT t.*, s.Service_Name, st.Last_Name AS Staff_Name
+                                FROM treatmentAppt t
+                                INNER JOIN service s ON t.Service_ID = s.Service_ID
+                                LEFT JOIN staff st ON t.Staff_ID = st.Staff_ID
+                                WHERE t.TAppt_ID = '$appointmentID'";
         } elseif ($appointmentType === "Pet Boarding") {
             $appointmentQuery = "SELECT b.*, s.Service_Name, st.Last_Name AS Staff_Name
                                  FROM boardingAppt b
@@ -47,6 +53,10 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
             echo "<p><strong>Appointment Type:</strong> Pet Grooming</p>";
             echo "<p><strong>Appointment Date:</strong> " . $appointmentData['GAppt_Date'] . "</p>";
             echo "<p><strong>Appointment Time:</strong> " . $appointmentData['GAppt_Time'] . "</p>";
+        } if ($appointmentType === "Pet Treatment") {
+            echo "<p><strong>Appointment Type:</strong> Pet Treatment</p>";
+            echo "<p><strong>Appointment Date:</strong> " . $appointmentData['TAppt_Date'] . "</p>";
+            echo "<p><strong>Appointment Time:</strong> " . $appointmentData['TAppt_Time'] . "</p>";
         } elseif ($appointmentType === "Pet Boarding") {
             echo "<p><strong>Appointment Type:</strong> Pet Boarding</p>";
             echo "<p><strong>Start Date:</strong> " . $appointmentData['BAppt_StartDate'] . "</p>";
