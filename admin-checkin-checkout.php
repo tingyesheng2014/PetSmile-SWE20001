@@ -46,10 +46,31 @@ if (isset($_SESSION['success_message'])) {
 <div class="container">
     <h1 class="display-4 m-0">Manage <span class="text-primary">Boarding Appointments</span></h1>
 
+    <form method="post" id="customerForm">
+        <div class="form-group">
+            <label for="customer">Select Customer:</label>
+            <select name="customer" id="customer" class="form-control">
+                <option>All Customer</option>
+                <?php
+                $selectCustomerQuery = "SELECT * FROM member";
+                $customerResult = mysqli_query($con, $selectCustomerQuery);
+
+                while ($row = mysqli_fetch_assoc($customerResult)) {
+                    $customerID = $row['Cust_ID'];
+                    echo "<option value='$custID'>$customerID</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <input type="submit" value="Show History" class="btn btn-primary">
+    </form>
+
+    <h2 class="mt-4">Pet Boarding Appointments</h2>
     <table class="table">
         <thead>
             <tr>
-                <th>Boarding Appointment ID</th>
+                <th>Boarding ID</th>
                 <th>Customer ID</th>
                 <th>Pet Name</th>
                 <th>Service Name</th>
