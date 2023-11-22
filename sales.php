@@ -5,6 +5,11 @@
 include 'config.php';
 include 'admin-header.php';
 
+if (!isset($_SESSION['Staff_ID'])) {
+    header("Location: admin-login.php");
+    exit;
+}
+
 echo "<div class='container text-center mt-5'>";
 echo "<h2 class='display-4 m-0'>Sales <span class='text-primary'>Details</span></h2>";
 echo "</div>";
