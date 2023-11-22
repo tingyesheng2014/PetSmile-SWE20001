@@ -227,7 +227,7 @@ if (isset($_SESSION['success_message'])) {
                     groomingTable.style.display = 'table';
                     boardingTable.style.display = 'none';
                     treatmentTable.style.display = 'none';
-                } if (bookingType === 'Pet Boarding Appointment') {
+                } else if (bookingType === 'Pet Boarding Appointment') {
                     groomingTable.style.display = 'none';
                     boardingTable.style.display = 'table';
                     treatmentTable.style.display = 'none';
