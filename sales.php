@@ -14,6 +14,30 @@ echo "<div class='container text-center mt-5'>";
 echo "<h2 class='display-4 m-0'>Sales <span class='text-primary'>Details</span></h2>";
 echo "</div>";
 
+// Check if a specific month is selected
+$selectedMonth = isset($_GET['month']) ? $_GET['month'] : date('m');
+
+// Display a form to select the month
+echo "<div class='container text-center mt-3'>";
+echo "<form method='get' action='sales.php'>";
+echo "<label for='month'>Select Month:</label>";
+echo "<select name='month' id='month' onchange='this.form.submit()'>";
+for ($i = 1; $i <= 12; $i++) {
+    $selected = ($i == $selectedMonth) ? 'selected' : '';
+    echo "<option value='$i' $selected>" . date('F', mktime(0, 0, 0, $i, 1)) . "</option>";
+}
+echo "</select>";
+echo "</form>";
+echo "</div>";
+
+// Add a button to show the entire month's sales
+echo "<div class='container text-center mt-3'>";
+echo "<form method='get' action='sales.php'>";
+echo "<input type='hidden' name='month' value='$selectedMonth'>";
+echo "<a href='generate-report.php' button type='submit' name='showAll' class='btn btn-primary'>Show All Sales for the Month</button>";
+echo "</form>";
+echo "</div>";
+
 echo "<div class='container'>";
 echo "<div class='text-right mb-3'>";
 echo "<a href='add-sales.php' class='btn btn-success'>Add Sales</a>";
@@ -25,6 +49,7 @@ echo "<tr>";
 echo "<th>Sales ID</th>";
 echo "<th>Customer ID</th>";
 echo "<th>Service ID</th>";
+echo "<th>Date</th>";
 echo "<th>Price</th>";
 echo "<th>Quantity</th>";
 echo "<th>Actions</th>";
@@ -33,7 +58,14 @@ echo "</thead>";
 echo "<tbody>";
 
 // Assuming you have a table named 'sales' in your database
-$salesQuery = "SELECT * FROM sales";
+if (isset($_GET['showAll'])) {
+    // Show all sales for the selected month
+    $salesQuery = "SELECT * FROM sales WHERE MONTH(Date) = $selectedMonth";
+} else {
+    // Show only a limited number of sales (e.g., first 10) for better performance
+    $salesQuery = "SELECT * FROM sales WHERE MONTH(Date) = $selectedMonth LIMIT 10";
+}
+
 $salesResult = mysqli_query($con, $salesQuery);
 
 if (!$salesResult) {
@@ -47,6 +79,7 @@ while ($salesData = mysqli_fetch_assoc($salesResult)) {
     echo "<td>" . $salesData['Sales_ID'] . "</td>";
     echo "<td>" . $salesData['Cust_ID'] . "</td>";
     echo "<td>" . $salesData['Service_ID'] . "</td>";
+    echo "<td>" . $salesData['Date'] . "</td>";
     echo "<td>" . $salesData['Price'] . "</td>";
     echo "<td>" . $salesData['Quantity'] . "</td>";
     echo "<td>";

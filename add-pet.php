@@ -10,8 +10,9 @@ if (isset($_POST['addPet'])) {
     $Pet_Name = mysqli_real_escape_string($con, $_POST['petname']);
     $Pet_Sex = mysqli_real_escape_string($con, $_POST['petsex']);
     $Pet_Breed = mysqli_real_escape_string($con, $_POST['petbreed']);
+    $Pet_Health = mysqli_real_escape_string($con, $_POST['pethealth']);
 
-    $insertPetQuery = "INSERT INTO pet (Cust_ID, Pet_Name, Pet_Sex, Pet_Breed) VALUES ('$Cust_ID', '$Pet_Name', '$Pet_Sex', '$Pet_Breed')";
+    $insertPetQuery = "INSERT INTO pet (Cust_ID, Pet_Name, Pet_Sex, Pet_Breed, Pet_Health) VALUES ('$Cust_ID', '$Pet_Name', '$Pet_Sex', '$Pet_Breed', '$Pet_Health')";
 
     if (mysqli_query($con, $insertPetQuery)) {
         echo '<div class="alert alert-success"><strong>New pet added successfully!</strong></div>';
@@ -45,6 +46,12 @@ if (isset($_POST['addPet'])) {
                     <label for="petbreed">Pet Breed:</label>
                     <input type="text" name="petbreed" id="petbreed"class="form-control"  required>
                 </div>
+
+                <div>
+                <label for="petbreed">Pet Health (How many vaccine taken):</label>
+                    <input type="text" name="pethealth" id="pethealth"class="form-control"  required>
+                </div>
+
 
                 <input type="submit" name="addPet" value="Add Pet" class="btn btn-success mt-3">
             </form>

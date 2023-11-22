@@ -91,6 +91,11 @@ $petData = mysqli_fetch_assoc($petResult);
                     <input type="text" name="petbreed" id="petbreed" class="form-control" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="petbreed">Pet Health (How many vaccine taken):</label>
+                    <input type="text" name="pethealth" id="pethealth" class="form-control" required>
+                </div>
+
                 <input type="submit" name="addPet" value="Add Pet" class="btn btn-success mt-3">
             </form>
         </div>
