@@ -60,6 +60,31 @@ $boardingAppointmentsQuery = "
 
 $boardingAppointmentsResult = mysqli_query($con, $boardingAppointmentsQuery);
 
+$treatmentAppointmentsQuery = "
+    SELECT
+        t.TAppt_ID,
+        c.Cust_ID,
+        p.Pet_Name,
+        s.Service_Name,
+        st.Last_Name AS Staff_Name,
+        t.TAppt_Date,
+        t.TAppt_Time,
+        t.Status
+    FROM
+        treatmentAppt t
+    INNER JOIN
+        pet p ON t.Pet_ID = p.Pet_ID
+    INNER JOIN
+        service s ON t.Service_ID = s.Service_ID
+    LEFT JOIN
+        staff st ON t.Staff_ID = st.Staff_ID
+    LEFT JOIN
+        member c ON p.Cust_ID = c.Cust_ID
+    ORDER BY t.TAppt_Date ASC;
+";
+
+$treatmentAppointmentsResult = mysqli_query($con, $treatmentAppointmentsQuery);
+
 if (isset($_SESSION['success_message'])) {
     echo '<div class="alert alert-success">' . $_SESSION['success_message'] . '</div>';
     unset($_SESSION['success_message']);
@@ -79,6 +104,7 @@ if (isset($_SESSION['success_message'])) {
                         <option>All Appointment</option>
                         <option>Pet Grooming Appointment</option>
                         <option>Pet Boarding Appointment</option>
+                        <option>Pet Treatment Appointment</option>
                     </select>
                 </div>
                 <input type="submit" value="Show History" class="btn btn-primary">
@@ -150,6 +176,41 @@ if (isset($_SESSION['success_message'])) {
                 </tbody>
             </table>
 
+            <h2 class="mt-4">Pet Treatment Appointments</h2>
+            <table class="table" id="treatmentTable">
+                <thead>
+                    <tr>
+                        <th>Treatment Appointment ID</th>
+                        <th>Customer ID</th>
+                        <th>Pet Name</th>
+                        <th>Service Name</th>
+                        <th>Staff Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  while ($row = mysqli_fetch_assoc($treatmentAppointmentsResult)) {
+                      echo "<tr>";
+                      echo "<td>{$row['TAppt_ID']}</td>";
+                      echo "<td>{$row['Cust_ID']}</td>";
+                      echo "<td>{$row['Pet_Name']}</td>";
+                      echo "<td>{$row['Service_Name']}</td>";
+                      echo "<td>{$row['Staff_Name']}</td>";
+                      echo "<td>{$row['TAppt_Date']}</td>";
+                      echo "<td>{$row['TAppt_Time']}</td>";
+                      echo "<td>{$row['Status']}</td>";
+                      echo "<td><button class='btn btn-primary' onclick='viewAppointment({$row['TAppt_ID']}, \"Pet Treatment\")'>View</button></td>";
+                      echo "</tr>";
+                  }
+                  ?>
+
+                </tbody>
+            </table>
+
             <script>
                 function viewAppointment(appointmentID, appointmentType) {
                     window.location.href = `view-appointment.php?appointmentID=${appointmentID}&appointmentType=${appointmentType}`;
@@ -160,16 +221,24 @@ if (isset($_SESSION['success_message'])) {
             function showAppointments(bookingType) {
                 var groomingTable = document.getElementById('groomingTable');
                 var boardingTable = document.getElementById('boardingTable');
+                var treatmentTable = document.getElementById('treatmentTable');
 
                 if (bookingType === 'Pet Grooming Appointment') {
                     groomingTable.style.display = 'table';
                     boardingTable.style.display = 'none';
-                } else if (bookingType === 'Pet Boarding Appointment') {
+                    treatmentTable.style.display = 'none';
+                } if (bookingType === 'Pet Boarding Appointment') {
                     groomingTable.style.display = 'none';
                     boardingTable.style.display = 'table';
+                    treatmentTable.style.display = 'none';
+                } else if (bookingType === 'Pet Treatment Appointment') {
+                    groomingTable.style.display = 'none';
+                    boardingTable.style.display = 'none';
+                    treatmentTable.style.display = 'table';
                 } else {
                     groomingTable.style.display = 'table';
                     boardingTable.style.display = 'table';
+                    treatmentTable.style.display = 'table';
                 }
             }
 
