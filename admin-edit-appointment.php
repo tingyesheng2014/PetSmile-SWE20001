@@ -9,7 +9,7 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
     $appointmentID = $_GET['appointmentID'];
     $appointmentType = $_GET['appointmentType'];
 
-    if ($appointmentType === "Pet Grooming" || $appointmentType === "Pet Boarding") {
+    if ($appointmentType === "Pet Grooming" || $appointmentType === "Pet Boarding" || $appointmentType === "Pet Treatment") {
         $appointmentQuery = "";
         if ($appointmentType === "Pet Grooming") {
             $appointmentQuery = "SELECT g.*, s.Service_Name, st.Last_Name AS Staff_Name,
@@ -21,6 +21,16 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
                                  LEFT JOIN staff st ON g.Staff_ID = st.Staff_ID
                                  LEFT JOIN member c ON p.Cust_ID = c.Cust_ID
                                  WHERE g.GAppt_ID = '$appointmentID'";
+      } if ($appointmentType === "Pet Treatment") {
+            $appointmentQuery = "SELECT t.*, s.Service_Name, st.Last_Name AS Staff_Name,
+                              p.Pet_Name,
+                              c.Cust_ID
+                              FROM treatmentAppt t
+                              INNER JOIN service s ON t.Service_ID = s.Service_ID
+                              INNER JOIN pet p ON t.Pet_ID = p.Pet_ID
+                              LEFT JOIN staff st ON t.Staff_ID = st.Staff_ID
+                              LEFT JOIN member c ON p.Cust_ID = c.Cust_ID
+                              WHERE t.TAppt_ID = '$appointmentID'";
         } elseif ($appointmentType === "Pet Boarding") {
             $appointmentQuery = "SELECT b.*, s.Service_Name, st.Last_Name AS Staff_Name,
                                  p.Pet_Name,
@@ -63,6 +73,17 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
               Staff_ID = '$newStaff',
               Status = '$newStatus'
               WHERE GAppt_ID = '$appointmentID'";
+     } if ($appointmentType === "Pet Treatment") {
+         $newDate = $_POST['new_date'];
+         $newTime = $_POST['new_time'];
+
+         $updateQuery = "UPDATE treatmentAppt SET
+             TAppt_Date = '$newDate',
+             TAppt_Time = '$newTime',
+             Staff_ID = '$newStaff',
+             Status = '$newStatus'
+             WHERE TAppt_ID = '$appointmentID'";
+
       } elseif ($appointmentType === "Pet Boarding") {
           $newStartDate = $_POST['start_date'];
           $newEndDate = $_POST['end_date'];
@@ -105,6 +126,21 @@ if (isset($_GET['appointmentID']) && isset($_GET['appointmentType'])) {
                                 <label for="new_time">Appointment Time:</label>
                                 <input type="time" id="new_time" name="new_time" value="' . $appointmentData['GAppt_Time'] . '" required>
                             </div>';
+                } if ($appointmentType === "Pet Treatment") {
+                            echo "<input type='hidden' name='appointmentType' value='Pet Treatment'>";
+                            echo "<p><strong>Appointment Type:</strong> Pet Treatment</p>";
+                            echo "<p><strong>Customer ID:</strong> " . $appointmentData['Cust_ID'] . "</p>";
+                            echo "<p><strong>Pet Name:</strong> " . $appointmentData['Pet_Name'] . "</p>";
+
+                            echo '<div class="form-group">
+                                        <label for="new_date">Appointment Date:</label>
+                                        <input type="date" id="new_date" name="new_date" value="' . $appointmentData['TAppt_Date'] . '" required>
+                                    </div>';
+
+                            echo '<div class="form-group">
+                                        <label for="new_time">Appointment Time:</label>
+                                        <input type="time" id="new_time" name="new_time" value="' . $appointmentData['TAppt_Time'] . '" required>
+                                    </div>';
                 } elseif ($appointmentType === "Pet Boarding") {
                     echo "<input type='hidden' name='appointmentType' value='Pet Boarding'>";
                     echo "<p><strong>Appointment Type:</strong> Pet Boarding</p>";
