@@ -1,15 +1,12 @@
-<?php
-include 'config.php';
-$selectServicesQuery = "SELECT * FROM service WHERE Service_Type = 'Pet Boarding'";
-$servicesResult = mysqli_query($con, $selectServicesQuery);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
 include 'config.php';
 include 'header.php';
+
+$selectServicesQuery = "SELECT * FROM service WHERE Service_Type = 'Pet Boarding'";
+$servicesResult = mysqli_query($con, $selectServicesQuery);
 ?>
 
     <div class="container-fluid bg-light pt-5 pb-4">
