@@ -72,7 +72,7 @@ if (isset($_POST['register'])) {
                     <section class="container py-5">
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <form method="POST" action="member-register.php">
+                                <form method="POST" action="register.php">
                                     <label for="username">Customer ID:</label>
                                     <input type="text" name="username" required><br><br>
                                     <label for="password">Password:</label>
