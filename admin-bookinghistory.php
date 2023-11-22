@@ -132,7 +132,7 @@ if (isset($_SESSION['success_message'])) {
             <table class="table" id="groomingTable">
                 <thead>
                     <tr>
-                        <th>Grooming Appointment ID</th>
+                        <th>Grooming ID</th>
                         <th>Customer ID</th>
                         <th>Pet Name</th>
                         <th>Service Name</th>
@@ -167,7 +167,7 @@ if (isset($_SESSION['success_message'])) {
             <table class="table" id="boardingTable">
                 <thead>
                     <tr>
-                        <th>Boarding Appointment ID</th>
+                        <th>Boarding ID</th>
                         <th>Customer ID</th>
                         <th>Pet Name</th>
                         <th>Service Name</th>
@@ -202,7 +202,7 @@ if (isset($_SESSION['success_message'])) {
             <table class="table" id="treatmentTable">
                 <thead>
                     <tr>
-                        <th>Treatment Appointment ID</th>
+                        <th>Treatment ID</th>
                         <th>Customer ID</th>
                         <th>Pet Name</th>
                         <th>Service Name</th>
@@ -250,7 +250,7 @@ if (isset($_SESSION['success_message'])) {
                 groomingTable.style.display = 'table';
                 boardingTable.style.display = 'none';
                 treatmentTable.style.display = 'none';
-            } if (bookingType === 'Pet Boarding Appointment') {
+            } else if (bookingType === 'Pet Boarding Appointment') {
                 filterTable(boardingTable, status);
                 boardingTable.style.display = 'table';
                 groomingTable.style.display = 'none';
@@ -263,6 +263,7 @@ if (isset($_SESSION['success_message'])) {
             } else {
                 filterTable(groomingTable, status);
                 filterTable(boardingTable, status);
+                filterTable(treatmentTable, status);
                 groomingTable.style.display = 'table';
                 boardingTable.style.display = 'table';
                 treatmentTable.style.display = 'table';
